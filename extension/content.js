@@ -1,4 +1,4 @@
-// Interview Copilot - content script. Builds a floating teleprompter overlay
+// Intervue - content script. Builds a floating teleprompter overlay
 // inside a shadow DOM so host-page CSS never leaks in (and vice versa).
 // Safe to execute multiple times in the same tab/frame - idempotent.
 
@@ -77,7 +77,7 @@
     const res = await fetch(chrome.runtime.getURL("overlay.css"));
     cssText = await res.text();
   } catch (e) {
-    console.warn("Interview Copilot: failed to load overlay.css", e);
+    console.warn("Intervue: failed to load overlay.css", e);
   }
 
   const host = document.createElement("div");
@@ -95,7 +95,7 @@
   root.innerHTML = `
     <div class="ic-header" id="ic-drag-handle">
       <span class="ic-grip">${ICONS.grip}</span>
-      <div class="ic-brand"><span class="ic-logo-dot"></span>INTERVIEW COPILOT</div>
+      <div class="ic-brand"><img class="ic-logo-dot" src="${chrome.runtime.getURL("icons/icon48.png")}" alt="" />INTERVUE</div>
       <div class="ic-indicators">
         <span class="ic-pill" id="ic-pill-listen" title="Listening status"><span class="dot"></span><span class="label">Idle</span></span>
         <span class="ic-pill" id="ic-pill-conn" title="Backend connection"><span class="dot"></span><span class="label">Backend</span></span>
@@ -595,7 +595,7 @@
     } catch (e) {
       // InvalidStateError if already started; otherwise surface it
       if (!/already started/i.test(e.message || "")) {
-        console.warn("Interview Copilot recognition start failed:", e);
+        console.warn("Intervue recognition start failed:", e);
       }
     }
   }

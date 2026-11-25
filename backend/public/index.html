@@ -2,14 +2,15 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Interview Copilot</title>
+  <title>Intervue</title>
+  <link rel="icon" href="favicon.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="wrap narrow">
     <header class="site">
-      <span class="logo-dot"></span>
-      <span class="brand">INTERVIEW COPILOT</span>
+      <img class="logo-dot" src="logo.png" alt="" />
+      <span class="brand">INTERVUE</span>
     </header>
 
     <h1>Live, personalized answers during your interview.</h1>
@@ -27,10 +28,7 @@
     </div>
   </div>
 
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="app.js"></script>
-  <script>
-    initLanding();
-  </script>
+  <script src="https://accounts.google.com/gsi/client" async onload="initLanding()" onerror="document.getElementById('status').textContent='Could not load Google sign-in script - check your connection.'; document.getElementById('status').className='err'"></script>
 </body>
 </html>

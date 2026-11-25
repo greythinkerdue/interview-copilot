@@ -214,7 +214,7 @@ app.post("/api/transcribe", maybeRequireAuth, async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Interview Copilot backend listening on http://localhost:${PORT} (STORAGE_MODE=${STORAGE_MODE})`);
+  console.log(`Intervue backend listening on http://localhost:${PORT} (STORAGE_MODE=${STORAGE_MODE})`);
   if (!process.env.GROQ_API_KEY) {
     console.warn("WARNING: GROQ_API_KEY is not set. Copy .env.example to .env and add your key.");
   }

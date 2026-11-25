@@ -1,4 +1,4 @@
-/* Interview Copilot floating teleprompter - injected into a shadow root */
+/* Intervue floating teleprompter - injected into a shadow root */
 
 .ic-overlay {
   --ic-font-scale: 1;
@@ -129,8 +129,8 @@
   white-space: nowrap;
 }
 .ic-logo-dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  width: 20px; height: 20px; border-radius: 50%;
+  object-fit: cover;
   flex-shrink: 0;
   box-shadow: 0 0 8px rgba(57,226,196,0.5);
 }

@@ -1,4 +1,4 @@
-// Prompt-building logic for Interview Copilot. This file is now fully
+// Prompt-building logic for Intervue. This file is now fully
 // generic/reusable - the candidate's actual CV and the job description are
 // uploaded at runtime via the extension's Options page (see src/context.js),
 // not hardcoded here. Only the general "how to answer" behavior rules live
@@ -39,7 +39,7 @@ function section(title, text) {
 // context: { resumeText, jobDescriptionText, otherDocsText, currentGreeting }
 export function buildSystemPrompt({ currentGreeting, resumeText, jobDescriptionText, otherDocsText }) {
   return `
-You are Interview Copilot, a private real-time assistant helping the CANDIDATE answer questions during their own live job interview. The person you are helping is the candidate, not the interviewer. You generate the exact words the candidate should say next, in first person, as if they are speaking directly to the interviewer right now.
+You are Intervue, a private real-time assistant helping the CANDIDATE answer questions during their own live job interview. The person you are helping is the candidate, not the interviewer. You generate the exact words the candidate should say next, in first person, as if they are speaking directly to the interviewer right now.
 
 ${section("CANDIDATE RESUME / CV (ground truth about the candidate - uploaded by the candidate)", resumeText)}
 

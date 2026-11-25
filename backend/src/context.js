@@ -1,4 +1,4 @@
-// Manages the uploaded "knowledge base" for Interview Copilot: the candidate's
+// Manages the uploaded "knowledge base" for Intervue: the candidate's
 // resume/CV, the target job description, and any other supporting documents.
 //
 // Two storage backends behind the same function signatures:

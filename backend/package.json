@@ -1,7 +1,7 @@
 {
   "name": "interview-copilot-backend",
   "version": "1.0.0",
-  "description": "Local backend for Interview Copilot Chrome extension - handles Groq API calls securely.",
+  "description": "Local backend for Intervue Chrome extension - handles Groq API calls securely.",
   "type": "module",
   "main": "server.js",
   "scripts": {
