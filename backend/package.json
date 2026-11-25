@@ -1,0 +1,24 @@
+{
+  "name": "interview-copilot-backend",
+  "version": "1.0.0",
+  "description": "Local backend for Interview Copilot Chrome extension - handles Groq API calls securely.",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "list-models": "node list-models.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^8.7.5",
+    "google-auth-library": "^11.3.4",
+    "jsonwebtoken": "^9.0.3",
+    "mammoth": "^1.13.0",
+    "multer": "^2.5.0",
+    "pdf-parse": "^2.4.5",
+    "pg": "^8.23.1"
+  }
+}

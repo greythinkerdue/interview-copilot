@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Interview Copilot</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="wrap narrow">
+    <header class="site">
+      <span class="logo-dot"></span>
+      <span class="brand">INTERVIEW COPILOT</span>
+    </header>
+
+    <h1>Live, personalized answers during your interview.</h1>
+    <p class="lead">
+      Upload your resume and the job description once. The Chrome extension listens during your
+      call and suggests a ready-to-speak, first-person answer grounded in your real background -
+      never generic, never invented.
+    </p>
+
+    <div class="card">
+      <h2>Sign in to get started</h2>
+      <p class="sub">Sign in with Google to create your account and manage your resume / job description.</p>
+      <div id="g_id_signin_container"></div>
+      <div id="status"></div>
+    </div>
+  </div>
+
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="app.js"></script>
+  <script>
+    initLanding();
+  </script>
+</body>
+</html>

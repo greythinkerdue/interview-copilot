@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "Interview Copilot",
+  "version": "1.0.0",
+  "description": "Floating AI teleprompter that listens to interview questions and suggests personalized, ready-to-speak answers.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": ["storage", "activeTab", "scripting", "identity"],
+  "host_permissions": ["http://localhost/*", "http://127.0.0.1/*", "https://*/*"],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Interview Copilot - click to show/hide the teleprompter",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    {
+      "resources": ["overlay.css"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "commands": {
+    "toggle-overlay": {
+      "suggested_key": { "default": "Alt+Shift+I" },
+      "description": "Show/hide the Interview Copilot overlay"
+    },
+    "toggle-listening": {
+      "suggested_key": { "default": "Alt+Shift+L" },
+      "description": "Start/stop listening"
+    },
+    "copy-answer": {
+      "suggested_key": { "default": "Alt+Shift+C" },
+      "description": "Copy the latest answer"
+    }
+  }
+}

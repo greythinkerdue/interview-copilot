@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Interview Copilot - Test Harness (not part of the extension)</title>
+<style>
+  body { font-family: sans-serif; background:#394150; margin:0; padding:40px; color:#fff; }
+  .fake-page { max-width:900px; }
+</style>
+</head>
+<body>
+  <div class="fake-page">
+    <h1>Fake interview page (stand-in for Google Meet / Zoom / Teams)</h1>
+    <p>This harness stubs the chrome.* extension APIs in a plain page so content.js can be
+    exercised and screenshotted without going through chrome://extensions load-unpacked.</p>
+  </div>
+
+  <script>
+    // ---- Minimal chrome.* stub for content.js ----
+    const sessionStore = {};
+    window.chrome = {
+      runtime: {
+        getURL: (p) => `../extension/${p}`, // this harness lives in scripts/, content.js lives in extension/
+        onMessage: { addListener: () => {} },
+        sendMessage: async (message, cb) => {
+          let response;
+          try {
+            if (message.type === "IC_HEALTH_CHECK") {
+              const r = await fetch("http://localhost:3001/api/health");
+              response = { ok: r.ok, data: await r.json() };
+            } else if (message.type === "IC_GENERATE_ANSWER") {
+              const r = await fetch("http://localhost:3001/api/generate-answer", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(message.payload),
+              });
+              const data = await r.json();
+              response = r.ok ? { ok: true, data } : { ok: false, error: data.error };
+            } else {
+              response = { ok: false, error: "unhandled message type in test harness" };
+            }
+          } catch (e) {
+            response = { ok: false, error: String(e) };
+          }
+          if (cb) cb(response);
+          return response;
+        },
+      },
+      storage: {
+        session: {
+          get: async (key) => ({ [key]: sessionStore[key] }),
+          set: async (obj) => Object.assign(sessionStore, obj),
+        },
+      },
+    };
+  </script>
+  <script src="../extension/content.js"></script>
+</body>
+</html>

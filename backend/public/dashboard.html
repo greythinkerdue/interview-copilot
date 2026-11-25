@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Interview Copilot - Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <header class="site" style="margin-bottom:0;">
+        <span class="logo-dot"></span>
+        <span class="brand">INTERVIEW COPILOT</span>
+      </header>
+      <div>
+        <span class="email-pill" id="email-pill"></span>
+        <button class="secondary" id="sign-out" style="margin-left:10px;">Sign out</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>1. Resume / CV <span id="resume-pill" class="pill" style="display:none;"></span></h2>
+      <p class="sub">PDF, DOCX, or TXT.</p>
+      <div id="resume-card"></div>
+      <input type="file" id="resume-file" accept=".pdf,.docx,.txt,.md" />
+    </div>
+
+    <div class="card">
+      <h2>2. Job Description <span id="jd-pill" class="pill" style="display:none;"></span></h2>
+      <p class="sub">Paste the job posting text, or upload a file.</p>
+      <div id="jd-card"></div>
+      <textarea id="jd-text" placeholder="Paste the full job description here..."></textarea>
+      <div class="row">
+        <button id="jd-save">Save pasted text</button>
+        <span class="sub" style="margin:0;">or</span>
+        <input type="file" id="jd-file" accept=".pdf,.docx,.txt,.md" />
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>3. Additional context (optional)</h2>
+      <p class="sub">Portfolio, achievements list, past interview notes, anything else relevant.</p>
+      <div id="other-list"></div>
+      <input type="file" id="other-file" accept=".pdf,.docx,.txt,.md" style="margin-top:10px;" />
+    </div>
+
+    <div class="card">
+      <h2>Connect the Chrome extension</h2>
+      <p class="sub">
+        Install the Interview Copilot extension, then click its icon and sign in with the same
+        Google account - it'll automatically see the resume and job description you upload here.
+      </p>
+    </div>
+
+    <div id="status"></div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>initDashboard();</script>
+</body>
+</html>
