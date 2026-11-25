@@ -17,7 +17,16 @@ import { query } from "./db.js";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = path.join(__dirname, "..", "data");
 const CONTEXT_FILE = path.join(DATA_DIR, "context.json");
-const MODE = process.env.STORAGE_MODE === "postgres" ? "postgres" : "local";
+const RAW_STORAGE_MODE = process.env.STORAGE_MODE;
+if (RAW_STORAGE_MODE && RAW_STORAGE_MODE !== "local" && RAW_STORAGE_MODE !== "postgres") {
+  // Any typo here (wrong case, missing letter, etc.) used to silently fall
+  // back to local mode with zero warning - fail loud instead.
+  console.error(
+    `FATAL: STORAGE_MODE="${RAW_STORAGE_MODE}" is not valid - it must be exactly "local" or "postgres" (lowercase). Refusing to start in the wrong mode silently.`
+  );
+  process.exit(1);
+}
+const MODE = RAW_STORAGE_MODE === "postgres" ? "postgres" : "local";
 
 function cleanText(text) {
   return text.replace(/\r\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
