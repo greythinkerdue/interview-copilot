@@ -194,3 +194,64 @@ scripts/
 - Overlay won't show: click the toolbar icon again, or reload the Meet/Zoom tab and click it once more.
 - "Backend offline": make sure the `npm start` terminal in `backend/` is still running.
 - Mic not working: just type the question manually - the AI answer quality is identical either way.
+
+---
+
+## 7. Going commercial: hosted multi-tenant mode
+
+Everything above describes **local mode** (`STORAGE_MODE=local`, the default) - one person, one
+machine, one JSON file, no accounts. The backend also supports a **hosted mode**
+(`STORAGE_MODE=postgres`) with Google sign-in and a real database, so many different people can each
+upload their own resume/job description and share one backend deployment. The full architecture
+decisions are written up in `C:\Users\MyBook Hype AMD\.claude\plans\foamy-twirling-nest.md`.
+
+### What's already built
+- `backend/src/auth.js` - Google sign-in (ID token verification for the website, OAuth
+  authorization-code exchange for the Chrome extension via `chrome.identity.launchWebAuthFlow`),
+  JWT session issuing/verification.
+- `backend/src/db.js` + `backend/migrations/001_init.sql` - Postgres connection + schema
+  (`users`, `user_context`, `user_other_docs`, `usage_log`).
+- `backend/src/context.js` - now supports both storage backends behind the same function names.
+- `backend/public/` - a plain-HTML website: landing page with "Sign in with Google", and a
+  `/dashboard` page to upload resume/job description (same UI pattern as the extension's Options page).
+- Per-user daily request cap (`DAILY_REQUEST_LIMIT`) and IP-based rate limiting on auth/generate
+  routes, so one shared Groq key can't be exhausted by a single user.
+
+### To actually go live, you need to do these yourself (I can't create accounts for you):
+
+1. **Create a Railway account** (https://railway.app), make a new Project, and add the **Postgres**
+   plugin to it - this auto-generates a `DATABASE_URL`.
+2. **Push this repo to GitHub** (it's already a git repo - `git remote add origin <your-repo-url>`
+   then `git push -u origin main`), then connect that GitHub repo to your Railway project so it
+   deploys automatically.
+3. **Google Cloud Console** (https://console.cloud.google.com): create a project, go to
+   "APIs & Services > Credentials", create an **OAuth 2.0 Client ID** (type: Web application).
+   - Authorized JavaScript origin: your Railway domain (e.g. `https://yourapp.up.railway.app`)
+   - Authorized redirect URIs: `https://yourapp.up.railway.app` (for the website) and
+     `https://<your-extension-id>.chromiumapp.org/` (for the Chrome extension - you'll know this
+     ID once you load the unpacked extension; it changes if you later publish to the Chrome Web Store)
+   - Configure the OAuth consent screen (External, basic info). Until you submit it for Google's
+     verification (needs a privacy policy URL), users will see an "unverified app" warning - fine
+     pre-launch.
+4. **Set these environment variables in Railway's dashboard** for the backend service:
+   ```
+   STORAGE_MODE=postgres
+   GROQ_API_KEY=<your key>
+   GOOGLE_CLIENT_ID=<from step 3>
+   GOOGLE_CLIENT_SECRET=<from step 3>
+   JWT_SECRET=<generate one: openssl rand -base64 32>
+   ALLOWED_ORIGINS=https://yourapp.up.railway.app,chrome-extension://<your-extension-id>
+   DAILY_REQUEST_LIMIT=100
+   ```
+   (`DATABASE_URL` is set automatically by the Postgres plugin.)
+5. **Run the schema migration once** against the new database: `npm run migrate` (with
+   `DATABASE_URL` set in your shell, or via Railway's one-off command runner).
+6. **Point the extension at the hosted backend**: in `extension/background.js`, change
+   `DEFAULT_BACKEND_URL` from `http://localhost:3001` to your Railway domain, then reload the
+   unpacked extension.
+7. Optional: buy a custom domain and point it at Railway; optional: a Chrome Web Store developer
+   account ($5 one-time) to publish the extension publicly instead of side-loading it.
+
+**Deliberately not built yet** (documented as out-of-scope for this pass): billing/subscriptions,
+tiered plans, an admin dashboard, or a polished marketing design - the plan file has the reasoning
+for deferring these.
