@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Intervue",
+  "name": "Intervue AI",
   "version": "1.0.0",
   "description": "Floating AI teleprompter that listens to interview questions and suggests personalized, ready-to-speak answers.",
   "icons": {
@@ -15,7 +15,7 @@
     "type": "module"
   },
   "action": {
-    "default_title": "Intervue - click to show/hide the teleprompter",
+    "default_title": "Intervue AI - click to show/hide the teleprompter",
     "default_icon": {
       "16": "icons/icon16.png",
       "48": "icons/icon48.png",
@@ -32,7 +32,7 @@
   "commands": {
     "toggle-overlay": {
       "suggested_key": { "default": "Alt+Shift+I" },
-      "description": "Show/hide the Intervue overlay"
+      "description": "Show/hide the Intervue AI overlay"
     },
     "toggle-listening": {
       "suggested_key": { "default": "Alt+Shift+L" },

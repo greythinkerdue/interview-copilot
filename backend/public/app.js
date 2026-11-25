@@ -1,4 +1,4 @@
-// Shared JS for the Intervue website (landing + dashboard).
+// Shared JS for the Intervue AI website (landing + dashboard).
 // Vanilla JS, no build step - matches the rest of this project.
 
 function getToken() {

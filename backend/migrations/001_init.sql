@@ -1,4 +1,4 @@
--- Intervue - initial schema. Idempotent (safe to run more than once).
+-- Intervue AI - initial schema. Idempotent (safe to run more than once).
 CREATE EXTENSION IF NOT EXISTS pgcrypto; -- for gen_random_uuid()
 
 CREATE TABLE IF NOT EXISTS users (

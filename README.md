@@ -1,4 +1,4 @@
-# Intervue
+# Intervue AI
 
 A floating AI teleprompter Chrome extension for live interviews (Google Meet / Zoom / Teams / any tab).
 It listens for interview questions (microphone or manual input), classifies them, and generates a
@@ -57,7 +57,7 @@ npm start
 You should see:
 
 ```
-Intervue backend listening on http://localhost:3001
+Intervue AI backend listening on http://localhost:3001
 ```
 
 Leave this terminal window running during your interview. Keep it running in the background.
@@ -68,11 +68,11 @@ Leave this terminal window running during your interview. Keep it running in the
 2. Turn on **Developer mode** (top-right toggle)
 3. Click **Load unpacked**
 4. Select the `extension` folder inside this project
-5. Pin the "Intervue" icon to your toolbar (puzzle-piece icon -> pin)
+5. Pin the "Intervue AI" icon to your toolbar (puzzle-piece icon -> pin)
 
 ### 1.3 Connect the extension to the backend, and upload your resume + job description
 
-1. Right-click the Intervue icon -> **Options** (or `chrome://extensions` -> Details -> Extension options)
+1. Right-click the Intervue AI icon -> **Options** (or `chrome://extensions` -> Details -> Extension options)
 2. Confirm Backend URL is `http://localhost:3001` (default), click **Test connection** - should say
    "Connected. Model: openai/gpt-oss-120b. Groq key set: yes"
 3. **Upload your resume/CV** (PDF, DOCX, or TXT) under section 1.
@@ -90,7 +90,7 @@ to the AI model when you ask a question.
 ## 2. Using it during the interview
 
 1. Open your Google Meet / Zoom / Teams tab.
-2. Click the Intervue toolbar icon (or press `Alt+Shift+I`) to show the floating overlay.
+2. Click the Intervue AI toolbar icon (or press `Alt+Shift+I`) to show the floating overlay.
 3. Drag it anywhere by its header. Resize it from the bottom-right corner handle.
 4. Two ways to get an answer:
    - **Manual (always reliable):** type the interviewer's question into the bottom input and press Enter.

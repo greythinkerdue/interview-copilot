@@ -29,7 +29,7 @@ async function ensureInjected(tabId) {
       files: ["content.js"],
     });
   } catch (e) {
-    console.warn("Intervue: could not inject into this tab", e);
+    console.warn("Intervue AI: could not inject into this tab", e);
   }
 }
 
